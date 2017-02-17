@@ -2,6 +2,7 @@ package com.devopsbuddy.utils;
 
 import com.devopsbuddy.backend.persistence.domain.backend.User;
 import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
+import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -63,4 +64,19 @@ public class UserUtils {
 
         return passwordResetUrl;
     }
+
+	public static <T extends BasicAccountPayload> User fromWebUserToDomainUser(T bapl) {
+		
+		User user=new User();
+		user.setCountry(bapl.getCountry());
+		user.setDescription(bapl.getDescription());
+		user.setEmail(bapl.getEmail());
+		user.setFirstName(bapl.getFirstName());
+		user.setPassword(bapl.getPassword());
+		user.setPhoneNumber(bapl.getPhoneNumber());
+		user.setEnabled(true);
+		user.setUsername(bapl.getUserName());
+		user.setPassword(bapl.getPassword());
+		return user;
+	}
 }

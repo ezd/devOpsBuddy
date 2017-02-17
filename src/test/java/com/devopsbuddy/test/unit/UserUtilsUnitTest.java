@@ -1,7 +1,13 @@
 package com.devopsbuddy.test.unit;
 
+import com.devopsbuddy.backend.persistence.domain.backend.User;
 import com.devopsbuddy.utils.UserUtils;
 import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
+import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
+
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,16 +22,19 @@ public class UserUtilsUnitTest {
 
     private MockHttpServletRequest mockHttpServletRequest;
 
+    PodamFactory podamFactory;
+    
     @Before
     public void init() {
         mockHttpServletRequest = new MockHttpServletRequest();
+        
+        podamFactory= new PodamFactoryImpl();
     }
 
     @Test
     public void testPasswordResetEmailUrlConstruction() throws Exception {
-
-        mockHttpServletRequest.setServerPort(8080); //Default is 80
-
+    	
+    	mockHttpServletRequest.setServerPort(8080); //Default is 80
         String token = UUID.randomUUID().toString();
         long userId = 123456;
 
@@ -36,5 +45,16 @@ public class UserUtilsUnitTest {
 
         Assert.assertEquals(expectedUrl, actualUrl);
 
+    }
+    @Test
+    public void testWebUserToDomainUser(){
+    	BasicAccountPayload basicAccountPayload=podamFactory.manufacturePojoWithFullData(BasicAccountPayload.class);
+    	basicAccountPayload.setEmail("something@gmail.com");
+        
+    	User user=UserUtils.fromWebUserToDomainUser(basicAccountPayload);
+    	
+    	Assert.assertNotNull(user);
+    	
+    	Assert.assertEquals(basicAccountPayload.getUserName(), user.getUsername());
     }
 }
