@@ -55,6 +55,6 @@ public class UserUtilsUnitTest {
     	
     	Assert.assertNotNull(user);
     	
-    	Assert.assertEquals(basicAccountPayload.getUserName(), user.getUsername());
+    	Assert.assertEquals(basicAccountPayload.getUsername(), user.getUsername());
     }
 }

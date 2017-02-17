@@ -9,6 +9,29 @@ function main() {
         $collapse.collapse('toggle');
     });
     
+    $('#signupForm').validate({
+    	rules:{
+    		username:"required",
+    		email:"required",
+    		password:"required",
+    		firstName:"required",
+    		lastName:"required",
+    		description:"required",
+    		country:"required",
+    		phoneNumber:"required"
+    	},
+    	messages:{
+    		username:"User name is required",
+    		email:"Email is required",
+    		password:"Password is required",
+    		firstName:"First name is required",
+    		lastName:"last name is required",
+    		description:"Description is required",
+    		country:"Country is required",
+    		phoneNumber:"Phone number is required"
+    	}
+    });
+    
     $('#contactForm').validate({
     	rules:{
     		email:{
@@ -29,6 +52,7 @@ function main() {
     		feedback:"Your feedback is valuable for us"
     	}
     });
+    
     
 
 }

@@ -75,7 +75,7 @@ public class UserUtils {
 		user.setPassword(bapl.getPassword());
 		user.setPhoneNumber(bapl.getPhoneNumber());
 		user.setEnabled(true);
-		user.setUsername(bapl.getUserName());
+		user.setUsername(bapl.getUsername());
 		user.setPassword(bapl.getPassword());
 		return user;
 	}
